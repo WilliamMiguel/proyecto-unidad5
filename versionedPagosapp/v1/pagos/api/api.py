@@ -1,6 +1,6 @@
 from pagos.models import Pagos
 from rest_framework import viewsets
-from .serializers import PagoSerializer
+from pagos.api.serializers import PagoSerializer
 from rest_framework.permissions import IsAuthenticated
 from pagos.pagination import StandardResultsSetPagination
 from rest_framework import viewsets, filters 
