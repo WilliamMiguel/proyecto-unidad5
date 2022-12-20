@@ -1,8 +1,2 @@
 env
-pagos\__pycache__
-pagos\api\__pycache__
-pagos\migrations\__pycache__
-pagosapp\__pycache__
-users\__pycache__
-users\api\__pycache__
-users\migrations\__pycache__
+*/__pycache__/

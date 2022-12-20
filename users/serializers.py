@@ -9,11 +9,13 @@ class SignUpSerializer(serializers.ModelSerializer):
     email = serializers.CharField(max_length=80)
     username = serializers.CharField(max_length=45)
     password = serializers.CharField(min_length=8, write_only=True)
-    is_staff = serializers.BooleanField(default=False)
+
+    # Activar para registrar un admin
+    # is_staff = serializers.BooleanField(default=False)
 
     class Meta:
         model = User
-        fields = ["email", "username", "password", 'is_staff']
+        fields = ["email", "username", "password"] #Añadir "is_staff" para registrar admin
 
     def validate(self, attrs):
 

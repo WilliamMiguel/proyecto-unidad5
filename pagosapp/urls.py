@@ -26,12 +26,19 @@ schema_view = get_schema_view(
 
 urlpatterns = [
    path('admin/', admin.site.urls),
+
+   # Versión actual
    path('users/', include('users.routers')),
-   # path('pagos/', include('pagos.routers')),
-   path('api/v1/pagos/', include(api_v1_pagos)),
-   path('api/v1/users/', include(api_v1_users)),
-   path('api/v2/pagos/', include(api_v2_pagos)),
-   path('api/v2/users/', include(api_v2_users)),
+   path('pagos/', include('pagos.routers')),
+
+   #Versión 1
+   # path('api/v1/pagos/', include(api_v1_pagos)),
+   # path('api/v1/users/', include(api_v1_users)),
+
+   #Versión 2
+   # path('api/v2/pagos/', include(api_v2_pagos)),
+   # path('api/v2/users/', include(api_v2_users)),
+   
    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
