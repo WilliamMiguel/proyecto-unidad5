@@ -24,7 +24,8 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     email = models.EmailField('Correo Electrónico',max_length = 255, unique = True,)
-    username = models.CharField(max_length = 255, unique = True)
+    username = models.CharField('Usuario',max_length = 255, unique = True)
+    is_staff = models.BooleanField('Admin',default=False)
     objects = UserManager()
 
     class Meta:

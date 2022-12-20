@@ -26,13 +26,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_filters',
     'users.apps.UsersConfig',
     'pagos.apps.PagosConfig',
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
     'drf_yasg',
 ]
 
@@ -45,13 +45,15 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'pagos.permissions.IsAdminOrReadOnly',
+    # ),
+
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.ScopedRateThrottle',
     ],
 
      'DEFAULT_THROTTLE_RATES': {
-        # 'anon': '100/day',
-        # 'user': '5/day',
         'others': '2000/day',
         'pagos': '1000/day',
     },
@@ -61,18 +63,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
 
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-
-   
-
-    # 'DEFAULT_THROTTLE_RATES': {
-    # 
-    # # 
-    # 'get': '1/day',
-    # },
-
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # )
 }
 
 MIDDLEWARE = [

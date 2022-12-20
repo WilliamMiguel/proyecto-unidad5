@@ -1,14 +1,10 @@
-from pagos.api.api import ServicesViewSet, ServicesListView, ExpiredPaymentsView, PaymentUserViewSet
+from pagos.api.api import ServicesViewSet, ExpiredPaymentsViewSet, PaymentUserViewSet
 from rest_framework.routers import DefaultRouter, SimpleRouter
 from django.urls import path
 
 router = DefaultRouter()
 router.register(r'payment', PaymentUserViewSet)
+router.register(r'services', ServicesViewSet)
+router.register(r'expired-payments', ExpiredPaymentsViewSet)
 
-urlpatterns = [
-    path('services/', ServicesListView.as_view(), name="services"),
-    path('expired-services/', ExpiredPaymentsView.as_view(), name="expired-services"),
-    # path('payment-services/', PaymentUserViewSet.as_view(), name="payment-services"),
-]
-
-urlpatterns += router.urls
+urlpatterns = router.urls

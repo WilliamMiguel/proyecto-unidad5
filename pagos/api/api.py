@@ -1,35 +1,27 @@
 from pagos.models import Services, Payment_user, Expired_payments
 from rest_framework import viewsets
-from rest_framework import generics
-from .serializers import ServicesSerializer, ExpiredPaymentsSerializer, PaymentUserSerializer
-from rest_framework.permissions import IsAuthenticated
+from pagos.api.serializers import ServicesSerializer, ExpiredPaymentsSerializer, PaymentUserSerializer
 from pagos.pagination import StandardResultsSetPagination
 from rest_framework import viewsets, filters 
+from pagos.permissions import IsAdminOrReadOnly, IsUserOrAdmin
 
 class ServicesViewSet(viewsets.ModelViewSet):
-    queryset = Services.objects.get_queryset().order_by('id')
+    queryset = Services.objects.all().order_by('id')
     serializer_class = ServicesSerializer
-    # pagination_class = StandardResultsSetPagination
-    filter_backends = [filters.SearchFilter]
-    # permission_classes = [IsAuthenticated]
-    throttle_scope = 'others'
-
-class ServicesListView(generics.ListAPIView):
-    queryset = Services.objects.all()
-    serializer_class = ServicesSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
     throttle_scope = 'others'
 
 class PaymentUserViewSet(viewsets.ModelViewSet):
-    queryset = Payment_user.objects.all()
+    queryset = Payment_user.objects.all().order_by('id')
     serializer_class = PaymentUserSerializer
+    # pagination_class = StandardResultsSetPagination
+    permission_classes = [IsUserOrAdmin]
     filter_backends = [filters.SearchFilter]
-    permission_classes = [IsAuthenticated]
     search_fields = ['paymentdate', 'expirationdate']
     throttle_scope = 'pagos'
 
-class ExpiredPaymentsView(generics.ListCreateAPIView):
-    queryset = Expired_payments.objects.all()
+class ExpiredPaymentsViewSet(viewsets.ModelViewSet):
+    queryset = Expired_payments.objects.all().order_by('id')
     serializer_class = ExpiredPaymentsSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsUserOrAdmin]
     throttle_scope = 'others'

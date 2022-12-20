@@ -25,7 +25,7 @@ class Payment_user(models.Model):
 class Expired_payments(models.Model):
     id = models.AutoField(primary_key=True)
     payment_user_id = models.ForeignKey(Payment_user, on_delete=models.CASCADE)
-    penalty_fee_amount = models.PositiveSmallIntegerField(default=0, verbose_name="Importe de la multa")
+    penalty_fee_amount = models.FloatField(default=0.0, verbose_name="Importe de la multa")
 
     def __str__(self) -> str:
         return self.payment_user_id.expirationdate

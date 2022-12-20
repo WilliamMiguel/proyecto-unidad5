@@ -5,8 +5,7 @@ from pagos.models import Expired_payments, Payment_user
 @receiver(post_save, sender = Payment_user)
 def create_expired_payment(sender, instance, created, **kwargs):
     if created and instance.paymentdate > instance.expirationdate:
-        print(instance.id)
         Expired_payments.objects.create(
             payment_user_id = instance,
-            penalty_fee_amount = 20
+            penalty_fee_amount = instance.amount * 0.25
         )
