@@ -5,6 +5,12 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from versionedPagosapp.v1.pagos.routers import api_urlpatterns as api_v1_pagos
+from versionedPagosapp.v2.pagos.routers import api_urlpatterns as api_v2_pagos
+
+from versionedPagosapp.v1.users.routers import api_urlpatterns as api_v1_users
+from versionedPagosapp.v2.users.routers import api_urlpatterns as api_v2_users
+
 schema_view = get_schema_view(
    openapi.Info(
       title="Documentación de API",
@@ -20,9 +26,12 @@ schema_view = get_schema_view(
 
 urlpatterns = [
    path('admin/', admin.site.urls),
-   path('users/', include('users.api.routers')),
-   path('', include('pagos.api.routers')),
-   # path('versions/', include('pagos.urls')),
+   path('users/', include('users.routers')),
+   # path('pagos/', include('pagos.routers')),
+   path('api/v1/pagos/', include(api_v1_pagos)),
+   path('api/v1/users/', include(api_v1_users)),
+   path('api/v2/pagos/', include(api_v2_pagos)),
+   path('api/v2/users/', include(api_v2_users)),
    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

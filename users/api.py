@@ -2,15 +2,15 @@ from django.contrib.auth import authenticate
 
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework import status, generics
+from rest_framework import status, generics, mixins
 from rest_framework.views import APIView
 from rest_framework import viewsets
 
-from versionedPagosapp.v1.users.serializers import SignUpSerializer, GetUserSerializer
-from versionedPagosapp.v1.users.models import User
-from versionedPagosapp.v1.users.tokens import create_jwt_pair_for_user
+from users.serializers import SignUpSerializer, GetUserSerializer
+from users.models import User
+from users.tokens import create_jwt_pair_for_user
+from users.permissions import IsAdminOrReadOnly
 
-# Create your views here.
 class SignUpView(generics.GenericAPIView):
     serializer_class = SignUpSerializer
 
@@ -32,7 +32,6 @@ class LoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(email=email, password=password)
-        print(user)
         if user is not None:
             tokens = create_jwt_pair_for_user(user)
             response = {"message": "Logeado correctamente", "email": email ,"tokens": tokens}
@@ -46,6 +45,7 @@ class LoginView(APIView):
 
         return Response(data=content, status=status.HTTP_200_OK)
 
-class GetUsers(viewsets.ReadOnlyModelViewSet):
+class GetUsersView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = GetUserSerializer
-    queryset = User.objects.all().order_by('id')
+    permission_classes = [IsAdminOrReadOnly]
+    queryset = User.objects.all()

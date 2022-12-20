@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'pagos.apps.PagosConfig',
+    'versionedPagosapp.apps.VersionedpagosappConfig',
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
