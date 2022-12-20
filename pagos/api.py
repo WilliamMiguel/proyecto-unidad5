@@ -8,7 +8,7 @@ from pagos.permissions import IsAdminOrReadOnly, IsUserOrAdmin
 class ServicesViewSet(viewsets.ModelViewSet):
     queryset = Services.objects.all().order_by('id')
     serializer_class = ServicesSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    # permission_classes = [IsAdminOrReadOnly]
     throttle_scope = 'others'
 
 class PaymentUserViewSet(viewsets.ModelViewSet):
