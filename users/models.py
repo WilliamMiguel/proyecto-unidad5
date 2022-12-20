@@ -22,9 +22,9 @@ class UserManager(BaseUserManager):
         return self.create_user(email=email, password=password, **extra_fields)
 
 class User(AbstractBaseUser):
-    username = models.CharField(max_length = 255, unique = True)
+    id = models.AutoField(primary_key=True)
     email = models.EmailField('Correo Electrónico',max_length = 255, unique = True,)
-    date_of_birth = models.DateField(null=True)
+    username = models.CharField(max_length = 255, unique = True)
     objects = UserManager()
 
     class Meta:

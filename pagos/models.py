@@ -1,23 +1,32 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
-from django.utils.translation import gettext_lazy as _
 from users.models import User
+from datetime import datetime
 
+class Services(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField('Servicio', max_length=50, unique=True, null=False, blank=False)
+    description = models.CharField('Descripción', max_length=150, blank=False, null=False)
+    logo = models.ImageField('Logo', upload_to='logos/', blank=True, null=True)
 
-class Pagos(models.Model):
-    class Services(models.TextChoices):
-        NETFLIX = 'NTX', _('Netflix')
-        AMAZON_VIDEO = 'AZV', _('Amazon Video')
-        START = 'ST', _('Start+')
-        PARAMOUNT = 'PMT', _('Paramount+')
+    def __str__(self) -> str:
+        return self.name
 
-    services = models.CharField(
-        max_length=3,
-        choices=Services.choices,
-        # default="Elige un servicio",
-    )
-    date_of_payment = models.DateField(auto_now_add=True)
-    amount = models.FloatField(default=0.0)
-    user = models.ForeignKey(User, on_delete =models.CASCADE, related_name='users')
+class Payment_user(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario")
+    service_id = models.ForeignKey(Services, on_delete=models.CASCADE, verbose_name="ID del servicio")
+    amount = models.FloatField(default=0.0, verbose_name="Monto a pagar")
+    paymentdate = models.DateField(auto_now_add=True, verbose_name="Fecha de pago")
+    expirationdate = models.DateField(verbose_name="Fecha de vencimiento")
+
+    def __str__(self) -> str:
+        return str(self.id)
+
+class Expired_payments(models.Model):
+    id = models.AutoField(primary_key=True)
+    payment_user_id = models.ForeignKey(Payment_user, on_delete=models.CASCADE)
+    penalty_fee_amount = models.PositiveSmallIntegerField(default=0, verbose_name="Importe de la multa")
+
+    def __str__(self) -> str:
+        return self.payment_user_id.expirationdate
+

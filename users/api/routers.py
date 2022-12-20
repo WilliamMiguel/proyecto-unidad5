@@ -14,9 +14,9 @@ router.register('', GetUsers, basename='users')
 urlpatterns = [
     path("signup/", SignUpView.as_view(), name="signupview"),
     path("login/", LoginView.as_view(), name="loginview"),
-    path("jwt/create/", TokenObtainPairView.as_view(), name="jwt_create"),
-    path("jwt/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("jwt/verify/", TokenVerifyView.as_view(), name="token_verify"),
+    # path("jwt/create/", TokenObtainPairView.as_view(), name="jwt_create"),
+    # path("jwt/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # path("jwt/verify/", TokenVerifyView.as_view(), name="token_verify"),
 ]
 
 urlpatterns += router.urls
