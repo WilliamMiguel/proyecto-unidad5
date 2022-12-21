@@ -1,7 +1,10 @@
 # Proyecto Unidad 5 - API de Pagos
 
 Proyecto desarrollado usando Django Rest Framework (DRF)
-Nota: Se sube el archivo <code>.env</code> para el correcto funcionamiento, sin embargo, de acuerdo a la guia [How to set up environment variables in Django](https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f) este archivo no debería subirse.
+
+Nota 1: Se sube el archivo <code>.env</code> para el correcto funcionamiento, sin embargo, de acuerdo a la guia [How to set up environment variables in Django](https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f) este archivo no debería subirse.
+
+Nota 2: La version por defecto es la número 2.
 
 ## Instalación
 
@@ -131,8 +134,6 @@ Manualmente se deben enviar los parámetros:
 ```
 
 El registro automático se realiza cuando la fecha de vencimiento (<code>expirationdate</code>) es menor a la fecha de pago (<code>paymentdate</code>) la cual se registra como fecha actual. Para esto se hace uso de *signals* (archivo <code>signals.py</code>) en donde se comparan las fechas. Este registro automático ingresa una multa del 25% del valor pagado.
-
-De igual forma, el *usuario* solo tiene acceso al método <code>GET</code> y el *admin* a todos los métodos.
 
 #### Permisos
 
