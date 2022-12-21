@@ -21,7 +21,7 @@ Instalar las dependencias que se encuentran en requirements.txt:
 pip install -r requirements.txt
 ```
 
-Crear un archivo **.env** en la carpeta del proyecto (pagosapp en este caso). Para la configuración de este archivo se ha seguido la guía: [How to set up environment variables in Django]('https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f').
+Crear un archivo **.env** en la carpeta del proyecto (pagosapp en este caso). Para la configuración de este archivo se ha seguido la guía: [How to set up environment variables in Django](https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f).
 
 Si no se desea crear el archivo **.env** se debe cambiar la siguiente configuración, reemplazando por los valores de un servidor local:
 ```py
@@ -47,7 +47,7 @@ py manage.py runserver
 ```
 La ruta para hacer uso de la API es: http://127.0.0.1:8000/ si se ha configurado DATABASES localmente.
 
-El proyecto tiene despliegue realizado en Railway, se puede acceder desde [aquí]('https://proyecto-unidad5-production.up.railway.app/').
+El proyecto tiene despliegue realizado en Railway, se puede acceder desde [aquí](https://proyecto-unidad5-production.up.railway.app/).
 
 Las peticiones se pueden realizar mediante Postman.
 
@@ -172,4 +172,4 @@ SIMPLE_JWT = {
 
 La documentación se ha realizado usando <code>drf-yasg</code>.
 
-Se puede acceder a ella en la ruta <code>/swagger/</code> o desde [aquí]('https://proyecto-unidad5-production.up.railway.app/swagger/').
+Se puede acceder a ella en la ruta <code>/swagger/</code> o desde [aquí](https://proyecto-unidad5-production.up.railway.app/swagger/).
