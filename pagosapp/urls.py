@@ -6,10 +6,10 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 from versionedPagosapp.v1.pagos.routers import api_urlpatterns as api_v1_pagos
-from versionedPagosapp.v2.pagos.routers import api_urlpatterns as api_v2_pagos
+from versionedPagosapp.v2.pagos.routers import urlpatterns as api_v2_pagos
 
 from versionedPagosapp.v1.users.routers import api_urlpatterns as api_v1_users
-from versionedPagosapp.v2.users.routers import api_urlpatterns as api_v2_users
+from versionedPagosapp.v2.users.routers import urlpatterns as api_v2_users
 
 schema_view = get_schema_view(
    openapi.Info(
