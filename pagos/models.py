@@ -15,7 +15,7 @@ class Payment_user(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario")
     service_id = models.ForeignKey(Services, on_delete=models.CASCADE, verbose_name="ID del servicio")
-    amount = models.FloatField(default=0.0, verbose_name="Monto a pagar")
+    amount = models.FloatField(verbose_name="Monto a pagar")
     paymentdate = models.DateField(auto_now_add=True, verbose_name="Fecha de pago")
     expirationdate = models.DateField(verbose_name="Fecha de vencimiento")
 
