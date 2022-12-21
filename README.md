@@ -1,6 +1,7 @@
 # Proyecto Unidad 5 - API de Pagos
 
 Proyecto desarrollado usando Django Rest Framework (DRF)
+Nota: Se sube el archivo .en para el correcto funcionamiento, sin embargo, de acuerdo a la guia [How to set up environment variables in Django](https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f) este archivo no debería subirse.
 
 ## Instalación
 
