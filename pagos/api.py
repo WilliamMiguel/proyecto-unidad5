@@ -23,5 +23,5 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
 class ExpiredPaymentsViewSet(viewsets.ModelViewSet):
     queryset = Expired_payments.objects.all().order_by('id')
     serializer_class = ExpiredPaymentsSerializer
-    permission_classes = [IsUserOrAdmin]
+    permission_classes = [IsAdminOrReadOnly]
     throttle_scope = 'others'
