@@ -6,7 +6,7 @@ class Services(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField('Servicio', max_length=50, unique=True, null=False, blank=False)
     description = models.CharField('Descripción', max_length=150, blank=False, null=False)
-    logo = models.ImageField('Logo', upload_to='logos/', blank=True, null=True)
+    logo = models.ImageField('Logo', upload_to='images/logos/', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name

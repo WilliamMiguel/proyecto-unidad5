@@ -17,7 +17,13 @@ class ExpiredPaymentsSerializer(serializers.ModelSerializer):
         return {
             'id': instance.id,
             'importe de la multa': instance.penalty_fee_amount,
-            'payment_user_id': instance.payment_user_id.id
+            'payment_user_id': instance.payment_user_id.id,
+            'user': instance.payment_user_id.user_id.username,
+            'email': instance.payment_user_id.user_id.email,
+            'service': instance.payment_user_id.service_id.name,
+            'fecha de pago': instance.payment_user_id.paymentdate,
+            'monto': instance.payment_user_id.amount,
+            'logo': instance.payment_user_id.service_id.logo.url,
         }
 
 class PaymentUserSerializer(serializers.ModelSerializer):
@@ -33,5 +39,7 @@ class PaymentUserSerializer(serializers.ModelSerializer):
             'fecha de pago': instance.paymentdate,
             'fecha de vencimiento': instance.expirationdate,
             'usuario': instance.user_id.username,
-            'servicio': instance.service_id.name
+            'servicio': instance.service_id.name,
+            'email': instance.user_id.email,
+            'logo': instance.service_id.logo.url,
         }
