@@ -86,7 +86,7 @@ showMoreExpired.addEventListener("click", function () {
 function payments(item) {
     return `
     <div class="col-12" id = "${item.id}">
-        <div class="card mb-3">
+        <div class="card mb-3" style="background-color: #8cf18f7d">
             <div class="row" style="align-items:center;">
                 <div class="col-md-2">
                     <img src="${item.logo}" style="height:50px;" alt="${item.servicio}">
@@ -116,7 +116,7 @@ function payments(item) {
 function expiredPayments(item) {
     return `
     <div class="col-12" id = "${item.id}">
-        <div class="card mb-3">
+        <div class="card mb-3" style="background-color: #d975757d">
             <div class="row" style="align-items:center;">
                 <div class="col-md-2">
                     <img src="${item.logo}" style="height:50px;" alt="${item.service}">
