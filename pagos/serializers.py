@@ -23,7 +23,7 @@ class ExpiredPaymentsSerializer(serializers.ModelSerializer):
             'service': instance.payment_user_id.service_id.name,
             'fecha de pago': instance.payment_user_id.paymentdate,
             'monto': instance.payment_user_id.amount,
-            'logo': instance.payment_user_id.service_id.logo.url,
+            'logo': instance.payment_user_id.service_id.logo.url if instance.payment_user_id.service_id.logo.url is not None else '',
         }
 
 class PaymentUserSerializer(serializers.ModelSerializer):
@@ -41,5 +41,5 @@ class PaymentUserSerializer(serializers.ModelSerializer):
             'usuario': instance.user_id.username,
             'servicio': instance.service_id.name,
             'email': instance.user_id.email,
-            'logo': instance.service_id.logo.url,
+            'logo': instance.service_id.logo.url if instance.service_id.logo.url is not None else '',
         }

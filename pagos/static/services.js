@@ -11,10 +11,10 @@ const formNewService = document.querySelector("#formNewService");
 const formModifyService = document.querySelector("#formModifyService");
 const nameService = document.querySelector('#addName');
 const prefixService = document.querySelector('#addPrefix');
-const logoService = document.querySelector('#addPrefix');
+const logoService = document.querySelector('#addLogo');
 const changeName = document.querySelector('#changeName');
 const changePrefix = document.querySelector('#changePrefix');
-const changeLogo = document.querySelector('#changePrefix');
+const changeLogo = document.querySelector('#changeLogo');
 const deleteButton = document.querySelector('#deleteButton');
 const showUsername = document.querySelector("#username")
 
@@ -54,12 +54,16 @@ let formServiceValidation = () => {
     }
 };
 
+
 // Función para crear el nuevo servicio
 async function newService() {
-    // const reader = new FileReader();
-    // reader.readAsDataURL(logoService.files[0]);
-    // reader.onload = function () {
-    //     var imagenBase64 = reader.result;
+    const logoService = document.querySelector('#addLogo');
+    const logoImg = logoService.files[0];
+    const reader = new FileReader();
+    reader.onload = function() {
+        const imageData = reader.result;
+      }
+    reader.readAsDataURL(logoImg);
     const response = await fetch("http://127.0.0.1:8000/pagos/services/", {
         method: "POST",
         mode: "cors",
@@ -71,7 +75,7 @@ async function newService() {
         body: JSON.stringify({
             name: nameService.value,
             prefix: prefixService.value,
-            // logo: imagenBase64
+            logo: imageData
         })
     });
 
@@ -248,6 +252,6 @@ async function verifyToken() {
     localStorage.setItem('tokenRefresh', data.refresh);
     const dateToken = new Date();
     localStorage.setItem('createdToken', dateToken);
-    const expiredDateToken = new Date(dateToken.setSeconds(dateToken.getSeconds() + 10));
+    const expiredDateToken = new Date(dateToken.setMinutes(dateToken.getMinutes() + 10));
     localStorage.setItem('expiredToken', expiredDateToken);
 }

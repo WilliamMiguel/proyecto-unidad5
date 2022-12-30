@@ -178,6 +178,6 @@ async function verifyToken() {
     localStorage.setItem('tokenRefresh', data.refresh);
     const dateToken = new Date();
     localStorage.setItem('createdToken', dateToken);
-    const expiredDateToken = new Date(dateToken.setSeconds(dateToken.getSeconds() + 10));
+    const expiredDateToken = new Date(dateToken.setMinutes(dateToken.getMinutes() + 10));
     localStorage.setItem('expiredToken', expiredDateToken);
 }
