@@ -11,38 +11,56 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-item" href="payments.html">Inicio</a>
-              <a class="navbar-item" href="new_payment.html">Añadir nuevo pago</a>
-              <a class="navbar-item" href="services.html" id="services">Servicios</a>
-              <div class="d-flex">
-                <img src="">
-                <li class="btn" id = "username"></li>
-                <li class="btn btn-outline-danger" type="submit">Cerrar sesión</li>
-              </div>
-            </div>
-          </nav>
 
-        <h1>Añadir nuevo pago</h1>
-        <main class="form w-50 mb-5">
-            <form id=formNewPayment method="post">
-                <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="expiredDate" placeholder="nombre@ejemplo.com">
-                    <label for="floatingInput">Fecha de vencimiento</label>
+    <div class="container-fluid mt-3 mb-5 mx-auto">
+        <ul class="nav nav-pills" style="justify-content: space-evenly; align-items: center;">
+            <li class="nav-item">
+                <a class="nav-link" href="payments.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="new_payment.html">Añadir nuevo pago</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="services.html" id="services">Servicios</a>
+            </li>
+            <li class="nav-link">
+                <div class="d-flex">
+                    <img src="">
+                    <li class="nav-item" id="username"></li>
+                    <li class="btn btn-outline-danger" type="submit" onclick="userLogout()">Cerrar sesión</li>
                 </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container-fluid">
+        <h1 class="text-center mb-5">Añadir nuevo pago</h1>
+
+        <div class="form w-50 mx-auto">
+            <form id=formNewPayment method="post">
+                <div class="mb-3">
+                    <label for="expiredDate" class="form-label">Fecha de vencimiento</label>
+                    <input type="date" class="form-control" id="expiredDate">
+                </div>
+                <div id="msg" class="alert alert-sm alert-danger d-none" role="alert">Ingrese la fecha de vencimiento
+                </div>
+
                 <div>
+                    <label for="options" class="form-label">Servicio</label>
                     <select class="form-select mb-3" id="options">
                     </select>
                 </div>
+
+                <label for="expiredDate" class="form-label">Monto</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text">S/.</span>
-                    <input type="text" class="form-control" placeholder="Monto" id="amount">
+                    <input type="text" class="form-control" placeholder="Ingresa la cantidad" id="amount">
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit" id="buttonAdd">Añadir</button>
+                <div id="msg1" class="alert alert-danger d-none" role="alert">El monto no puede estar en blanco</div>
+
+                <button class="w-100 btn btn-primary" type="submit" id="buttonAdd">Añadir pago</button>
             </form>
-        </main>
+        </div>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

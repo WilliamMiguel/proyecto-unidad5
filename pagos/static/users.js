@@ -1,10 +1,6 @@
 const tokenAccess = localStorage.getItem("tokenAccess") ?? [];
 const tokenRefresh = localStorage.getItem("tokenRefresh") ?? [];
 
-if (tokenAccess !== []){
-    window.location.
-}
-
 const formUser = document.querySelector("#formUser")
 const inputEmail = document.querySelector("#email");
 const inputPassword = document.querySelector("#password");
@@ -34,10 +30,15 @@ async function userLogin(email, password){
         const data = await response.json();
         localStorage.setItem('tokenAccess', data.tokens["access"]);
         localStorage.setItem('tokenRefresh', data.tokens["refresh"]);
+        const dateToken = new Date();
+        localStorage.setItem('createdToken', dateToken);
+        const expiredDateToken = new Date(dateToken.setSeconds(dateToken.getSeconds() + 10));
+        localStorage.setItem('expiredToken', expiredDateToken);
         localStorage.setItem('email', data.email);
 
         const tokenAccess = localStorage.getItem('tokenAccess');
         const newresponse = await fetch("http://127.0.0.1:8000/users/", {
+            mode: "cors",
             headers: {
                 "Authorization": `Bearer ${tokenAccess}`
             }

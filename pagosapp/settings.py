@@ -61,8 +61,8 @@ REST_FRAMEWORK = {
     ],
 
      'DEFAULT_THROTTLE_RATES': {
-        'others': '2000/day',
-        'pagos': '1000/day',
+        'others': '20000/day',
+        'pagos': '10000/day',
     },
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

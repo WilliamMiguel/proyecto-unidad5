@@ -6,6 +6,8 @@ from rest_framework import status, generics, mixins
 from rest_framework.views import APIView
 from rest_framework import viewsets
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from users.serializers import SignUpSerializer, GetUserSerializer
 from users.models import User
 from users.tokens import create_jwt_pair_for_user
@@ -44,6 +46,16 @@ class LoginView(APIView):
         content = {"user": str(request.user), "auth": str(request.auth)}
 
         return Response(data=content, status=status.HTTP_200_OK)
+
+class LogoutView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        user = User.objects.filter(id=request.data.get('id', 0))
+        if user.exists():
+            RefreshToken.for_user(user.first())
+            return Response({'message': 'Sesión cerrada correctamente.'}, status=status.HTTP_200_OK)
+        return Response({'error': 'No existe este usuario.'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class GetUsersView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = GetUserSerializer
