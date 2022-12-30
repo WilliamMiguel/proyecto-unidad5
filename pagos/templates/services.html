@@ -48,14 +48,23 @@
                     <label for="addName" class="form-label">Nombre del servicio</label>
                     <input type="text" class="form-control" id="addName" name="name" placeholder="Ej.:Netflix">
                 </div>
+                <div id="msg" class="alert alert-sm alert-danger d-none" role="alert">
+                  Ingrese el nombre del servicio
+              </div>
                 <div class="mb-3">
                     <label for="addPrefix" class="form-label">Prefijo (max. 3 letras)</label>
                     <input type="text" class="form-control" id="addPrefix" name="prefix" placeholder="Ej.: NTF">
                 </div>
+                <div id="msg1" class="alert alert-sm alert-danger d-none" role="alert">
+                  Ingrese un prefijo para el servicio
+              </div>
                 <div class="mb-3">
                     <label for="addLogo" class="form-label">Logo</label>
                     <input type="file" class="form-control" id="addLogo" name="logo">
                 </div>
+                <div id="msg2" class="alert alert-sm alert-danger d-none" role="alert">
+                  Ingrese un logo para el servicio
+              </div>
                 <button class="w-100 btn btn-success" type="submit" id="buttonAdd">Añadir</button>
             </form>
         </div>
@@ -73,14 +82,23 @@
                     <label for="addName" class="form-label">Nombre del servicio</label>
                     <input type="text" class="form-control" id="changeName" name="chname">
                 </div>
+                <div id="cmsg" class="alert alert-sm alert-danger d-none" role="alert">
+                  Ingrese el nombre del servicio
+              </div>
                 <div class="mb-3">
                     <label for="addPrefix" class="form-label">Prefijo (max. 3 letras)</label>
                     <input type="text" class="form-control" id="changePrefix" name="chprefix">
                 </div>
+                <div id="cmsg1" class="alert alert-sm alert-danger d-none" role="alert">
+                  Ingrese un prefijo para el servicio
+              </div>
                 <div class="mb-3">
                     <label for="addLogo" class="form-label">Logo</label>
                     <input type="file" class="form-control" id="changeLogo" name="chlogo">
                 </div>
+                <div id="cmsg2" class="alert alert-sm alert-danger d-none" role="alert">
+                  Ingrese un logo para el servicio
+              </div>
                 <div class="btn btn-group w-100">
                     <button class="btn btn-warning" type="submit" id="buttonChange">Modificar</button>
                     <button class="btn btn-danger" id="deleteButton">Eliminar</button>

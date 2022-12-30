@@ -1,6 +1,3 @@
-// import { verifyToken } from "./refreshToken";
-// setInterval(verifyToken, 14 * 60 * 1000);
-
 // Variables para identificar al usuario
 const getEmail = localStorage.getItem('email')
 const getAdmin = localStorage.getItem('is_staff')
@@ -8,6 +5,8 @@ const getUsername = localStorage.getItem('username')
 const getUserID = localStorage.getItem('userID')
 const tokenAccess = localStorage.getItem('tokenAccess');
 const expiredToken = localStorage.getItem('expiredToken')
+
+services()
 
 // Elementos del documento HTML a modificar
 const formNewPayment = document.querySelector("#formNewPayment");
@@ -23,7 +22,7 @@ let msg1 = document.getElementById("msg1");
 showUsername.innerHTML = `<h6 style="margin:0;">Bienvenido, ${getUsername}</h6>`
 
 // Mostrar la opción de servicios si es Admin
-if (getAdmin === "false"){
+if (getAdmin === "false") {
     showServices.style.display = "none";
 }
 
@@ -49,7 +48,6 @@ let formValidation = () => {
 };
 
 async function newPayment() {
-    const tokenAccess = localStorage.getItem('tokenAccess');
     const response = await fetch("http://127.0.0.1:8000/pagos/payment/", {
         method: "POST",
         mode: "cors",
@@ -63,21 +61,43 @@ async function newPayment() {
             expirationdate: expiredDate.value,
             service_id: options.value
         })
+
     })
-    if (response.status==401){
+
+    if (response.status == 201) {
+        Swal.fire(
+            '¡Creado!',
+            'Los datos se guardaron correctamente',
+            'success'
+        ).then((result) => {
+            console.log(result)
+            debugger
+            if (result.isConfirmed) {
+                window.location.href("./payments.html");
+            }
+        })
+    }
+    else {
+        Swal.fire({
+            icon: "error",
+            title: 'Oops...',
+            text: "¡Ingresaste un valor incorrecto!"
+        })
+    }
+
+    if (response.status == 401) {
         window.location.replace("./login.html")
     }
-}
+};
 
-async function services(){
-    const tokenAccess = localStorage.getItem('tokenAccess');
+async function services() {
     const response = await fetch("http://127.0.0.1:8000/pagos/services/", {
         mode: "cors",
         headers: {
             "Authorization": `Bearer ${tokenAccess}`
         }
     });
-    if (response.status==401){
+    if (response.status == 401) {
         window.location.replace("./login.html")
     }
     const data = await response.json();
@@ -89,8 +109,6 @@ async function services(){
         options.appendChild(newOption);
     })
 }
-
-services()
 
 // Función para cerrar sesión
 async function userLogout() {
@@ -106,4 +124,27 @@ async function userLogout() {
         })
     });
     localStorage.clear()
+}
+
+// Para obtener nuevos tokens
+setInterval(verifyToken, 14 * 60 * 1000);
+async function verifyToken() {
+    const refreshToken = localStorage.getItem('tokenRefresh')
+    const response = await fetch('http://127.0.0.1:8000/users/refresh-token/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            refresh: refreshToken
+        })
+    });
+    const data = await response.json();
+    localStorage.setItem('tokenAccess', data.access);
+    localStorage.setItem('tokenRefresh', data.refresh);
+    const dateToken = new Date();
+    localStorage.setItem('createdToken', dateToken);
+    const expiredDateToken = new Date(dateToken.setSeconds(dateToken.getSeconds() + 10));
+    localStorage.setItem('expiredToken', expiredDateToken);
 }

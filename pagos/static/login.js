@@ -1,10 +1,15 @@
 const tokenAccess = localStorage.getItem("tokenAccess") ?? [];
 const tokenRefresh = localStorage.getItem("tokenRefresh") ?? [];
 
+if (tokenAccess.length > 0){
+    window.location.replace('./payments.html')
+}
+
 const formUser = document.querySelector("#formUser")
 const inputEmail = document.querySelector("#email");
 const inputPassword = document.querySelector("#password");
 const buttonLogin = document.querySelector("#buttonLogin");
+let msg = document.getElementById("msg");
 
 formUser.addEventListener('submit', (event) =>{
     const emailLogin = inputEmail.value;
@@ -52,6 +57,6 @@ async function userLogin(email, password){
         window.location.replace('./payments.html');
 
     } else {
-        console.error("Ingresa un correo y contraseña válidos")
+        msg.classList.remove("d-none");
     }
 }

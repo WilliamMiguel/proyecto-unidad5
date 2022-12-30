@@ -4,10 +4,10 @@ from datetime import datetime
 
 class Services(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField('Servicio', max_length=50, unique=True, null=True, blank=True)
+    name = models.CharField('Servicio', max_length=50, unique=True, null=False, blank=False)
     description = models.CharField('Descripción', max_length=150, blank=True, null=True)
     logo = models.ImageField('Logo', upload_to='images/logos/', blank=True, null=True)
-    prefix = models.CharField('Prefijo', max_length=3, unique=True, null=True, blank=True)
+    prefix = models.CharField('Prefijo', max_length=3, unique=True, null=False, blank=False)
 
     def __str__(self) -> str:
         return self.name
